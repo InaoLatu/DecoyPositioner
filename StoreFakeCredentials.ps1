@@ -1,17 +1,8 @@
 function StoreFakeCredentials {
-    [CmdletBinding()]
-    Param (
-        # [Parameter(Mandatory = $True, Position = 0)]
-        # [ValidateNotNullOrEmpty()]
-        [String]
-        $Domain,
-        [String]
-        $Username,
-        [String]
-        $Password
-    )
-
-
+    
+    $Domain = "marvel.local"
+    $Username = "IT.Administrator"
+    $Password = "2021passIT."
     $PSPassword = $Password | ConvertTo-SecureString -asPlainText -Force
 
     $SystemModule = [Microsoft.Win32.IntranetZoneCredentialPolicy].Module
