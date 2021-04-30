@@ -27,7 +27,7 @@ Function DeployKerberoastingDecoy {
 
 Function DeployPassTheHashDecoy {
     Write-Host "Deploying PassTheHash decoy..."
-    Invoke-Command -ComputerName "THE-PUNISHER" -ScriptBlock {.\StoreFakeCredentials.ps1 -Domain marvel.local -Username AD.Admin -Password Password123}
+    # Invoke-Command -ComputerName "THE-PUNISHER" -ScriptBlock {.\StoreFakeCredentials.ps1 -Domain marvel.local -Username AD.Admin -Password Password123}
     # .\StoreFakeCredentials.ps1 -Domain marvel.local -Username AD.Admin -Password Password123
 }
 
