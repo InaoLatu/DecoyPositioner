@@ -1,8 +1,5 @@
 Import-Module ActiveDirectory
 $password = "Password1" | ConvertTo-SecureString -AsPlainText -Force
-# $ADS_UF_NORMAL_ACCOUNT = 512
-# $ADS_UF_DONT_REQUIRE_PREAUTH = 4194304
-# # 4194816 
 
 try {
     $user = Get-ADUser -Identity j.robinson4
@@ -18,10 +15,10 @@ if ($UserExists) {
 }
 
 $user = @{
-    Name = "Jack ASSREPRoast"
-    GivenName = "Jack"
+    Name = "John ASSREPRoast"
+    GivenName = "John"
     Surname = "ASSREPRoast"
-    SamAccountName = "j.robinson4"
+    SamAccountName = "j.asreproast"
     ChangePasswordAtLogon = 0 
     CannotChangePassword = 1 
     PasswordNeverExpires = 1 
