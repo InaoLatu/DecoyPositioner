@@ -3,7 +3,7 @@ Import-Module ActiveDirectory
 $password = "Password1" | ConvertTo-SecureString -AsPlainText -Force
 
 try {
-    $user = Get-ADUser -Identity j.robinson3
+    $user = Get-ADUser -Identity j.kerberoasting
     $UserExists = $true
 }
 catch [Microsoft.ActiveDirectory.Management.ADIdentityResolutionException] {
@@ -29,4 +29,4 @@ $user = @{
     }
 New-ADUser @user
 
-Add-ADGroupMember -Identity "Domain Admins" -Members "j.robinson3"
+Add-ADGroupMember -Identity "Domain Admins" -Members "j.kerberoasting"

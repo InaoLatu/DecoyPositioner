@@ -37,8 +37,3 @@
     if (-not $Result) {
         throw 'Unable to create process as user.'
     }
-
-    # if ($ProcInfo.dwProcessId) {
-    #     # Kill the cmd.exe process
-    #     Stop-Process -Id $ProcInfo.dwProcessId
-    # }

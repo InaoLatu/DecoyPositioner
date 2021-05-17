@@ -2,7 +2,7 @@ Import-Module ActiveDirectory
 $password = "Password1" | ConvertTo-SecureString -AsPlainText -Force
 
 try {
-    $user = Get-ADUser -Identity j.robinson4
+    $user = Get-ADUser -Identity j.asreproast
     $UserExists = $true
 }
 catch [Microsoft.ActiveDirectory.Management.ADIdentityResolutionException] {
@@ -27,4 +27,4 @@ $user = @{
     }
 New-ADUser @user
 
-Set-ADAccountControl -Identity j.robinson4 -DoesNotRequirePreAuth $True
+Set-ADAccountControl -Identity j.asreproast -DoesNotRequirePreAuth $True
