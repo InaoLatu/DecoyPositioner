@@ -1,5 +1,6 @@
-# sysvol decoy
-function Invoke-GPPDeception {
+# Creating Group Policy Preference decoy in sysvol 
+
+function Create-GPPDecoy {
     $Plaintext = "Password1" 
     $UserName = "Administrator"
     $DomainPath = "\\companydomain\sysvol\companydomain.local\"
@@ -16,8 +17,8 @@ function Invoke-GPPDeception {
         Write-Host "GPP decoy already deployed"
         exit
     }
-    $cPassword = Get-EncryptedCpassword $Plaintext
-    $XMLString = GenXMLString $cPassword $UserName
+    $cPassword = Build-DecoyPassword $Plaintext
+    $XMLString = Build-XMLContent $cPassword $UserName
     $DecoyFile = $FolderFinal + 'groups.xml'
     Set-Content -Path $DecoyFile -Value $XMLString  # creating the .xml
     }
@@ -25,7 +26,7 @@ function Invoke-GPPDeception {
 
 }
 
-function Get-EncryptedCpassword {
+function Build-DecoyPassword {
     [cmdletbinding()]
     param(
     [String] $Plaintext
@@ -53,7 +54,7 @@ function Get-EncryptedCpassword {
        return $CipherText
 }  
 
-function GenXMLString {
+function Build-XMLContent {
     [cmdletbinding()]
     param(
     [String] $cPassword,
@@ -80,7 +81,7 @@ function GenXMLString {
     $GString = '<Groups clsid="' + $GroupsClsid + '">'
 
     # Build User String
-    $date = Get-RandomDate
+    $date = Build-Date
     $UString = '<User clsid="' + $UserClsid
     $UString += '" name="' + $UserName + '" '
     $UString += 'image="0" changed="' + $date + '" '
@@ -100,7 +101,7 @@ function GenXMLString {
     return $FinalXML
 }
 
-function Get-RandomDate {
+function Build-Date {
     [DateTime] $Min = "01/01/2012 00:00:00"
     [DateTime] $Max = "12/31/2020 23:59:59"
     $randomTicks = Get-Random -Minimum $Min.Ticks -Maximum $Max.Ticks
@@ -109,4 +110,4 @@ function Get-RandomDate {
 }
 
 
-Invoke-GPPDeception
+Create-GPPDecoy

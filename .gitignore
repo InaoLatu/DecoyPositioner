@@ -2,3 +2,5 @@ test.ps1
 test2.ps1
 test3.ps1
 groups.xml
+RemoteStoreDecoyCredentials.ps1
+StoreDecoyCredentials.ps1

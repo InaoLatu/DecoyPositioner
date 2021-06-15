@@ -1,5 +1,6 @@
-# Store Pass the ticket decoy
-$username = 'COMPANYDOMAIN\j.passtheticket'
+# Storage of Pass the ticket decoy in memory
+
+$username = 'COMPANYDOMAIN\j.patterson'
 $password = 'Password1'
 
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force

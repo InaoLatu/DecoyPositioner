@@ -1,9 +1,10 @@
-Import-Module ActiveDirectory
+# Creating decoy user for Kerberoasting attack
 
+Import-Module ActiveDirectory
 $password = "Password1" | ConvertTo-SecureString -AsPlainText -Force
 
 try {
-    $user = Get-ADUser -Identity j.kerberoasting
+    $user = Get-ADUser -Identity j.kelly
     $UserExists = $true
 }
 catch [Microsoft.ActiveDirectory.Management.ADIdentityResolutionException] {
@@ -16,10 +17,10 @@ if ($UserExists) {
 }
 
 $user = @{
-    Name = "John Kerberoasting"
+    Name = "John Kelly"
     GivenName = "John"
-    Surname = "Kerberoasting"
-    SamAccountName = "j.kerberoasting"
+    Surname = "Kelly"
+    SamAccountName = "j.kelly"
     ChangePasswordAtLogon = 0 
     CannotChangePassword = 1 
     PasswordNeverExpires = 1 
@@ -29,4 +30,10 @@ $user = @{
     }
 New-ADUser @user
 
-Add-ADGroupMember -Identity "Domain Admins" -Members "j.kerberoasting"
+Add-ADGroupMember -Identity "Domain Admins" -Members "j.kelly"
+
+# To update the value of LastLogon 
+$username = 'COMPANYDOMAIN\j.kelly'
+$credential = New-Object System.Management.Automation.PSCredential $username, $password
+$ActivateLastLogon = Start-Process powershell.exe -Credential $credential -PassThru -ArgumentList '-WindowStyle Hidden'
+Stop-Process $ActivateLastLogon -Force
