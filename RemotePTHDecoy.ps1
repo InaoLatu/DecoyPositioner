@@ -4,7 +4,6 @@ Import-Module ActiveDirectory
 Add-Type -AssemblyName System.Web
 
 
-
 try {
     $user = Get-ADUser -Identity IT.administrator
     $UserExists = $true
@@ -34,6 +33,7 @@ if (-Not $UserExists) {
     $credential = New-Object System.Management.Automation.PSCredential $username, $password
     $ActivateLastLogon = Start-Process powershell.exe -Credential $credential -PassThru -ArgumentList '-WindowStyle Hidden'
     Stop-Process $ActivateLastLogon -Force
+	Remove-ADGroupMember -Identity "Domain Admins" -Members "IT.administrator"
 }
 
 $Session = New-PSSession -ComputerName DESKTOP-K0KPB39

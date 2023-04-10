@@ -1,4 +1,4 @@
-# Creating Group Policy Preference decoy in sysvol 
+# Creating Group Policy Preference decoy file in sysvol 
 
 function Create-GPPDecoy {
     $Plaintext = "Password1" 
