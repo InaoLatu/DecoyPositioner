@@ -2,7 +2,7 @@
 
 $Domain = "COMPANYDOMAIN.local"
 $Username = "IT.administrator"
-$Password = "2021_passIT4308"
+$Password = "2021_passIT4308"  # fake password
 $PSPassword = $Password | ConvertTo-SecureString -asPlainText -Force
 
 $SystemModule = [Microsoft.Win32.IntranetZoneCredentialPolicy].Module

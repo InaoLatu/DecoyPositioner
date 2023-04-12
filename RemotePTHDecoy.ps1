@@ -2,6 +2,7 @@
 
 Import-Module ActiveDirectory
 Add-Type -AssemblyName System.Web
+$Computer = "DESKTOP-K0KPB39"  # define the name of the computer where the decoy will be stored
 
 
 try {
@@ -36,7 +37,7 @@ if (-Not $UserExists) {
 	Remove-ADGroupMember -Identity "Domain Admins" -Members "IT.administrator"
 }
 
-$Session = New-PSSession -ComputerName DESKTOP-K0KPB39
+$Session = New-PSSession -ComputerName $Computer
 
 try {
     Copy-Item "StorePTHDecoy.ps1"  -ToSession $Session -Destination "C:\Users\scripts"
@@ -45,10 +46,14 @@ catch{
 }
 
 Invoke-Command -Session $Session -ScriptBlock {
-    $JobExists = Get-ScheduledTask | Where-Object {$_.TaskName -like "SystemUpdate" }
+    $JobExists = Get-ScheduledTask | Where-Object {$_.TaskName -like "SystemUpdate101" }
 
     if (-Not $JobExists) {
         $trigger = New-JobTrigger -AtStartup -RandomDelay 00:00:30
-        Register-ScheduledJob -Name SystemUpdate -Trigger $trigger -FilePath "C:\Users\scripts\StorePTHDecoy.ps1"
+        Register-ScheduledJob -Name SystemUpdate101 -Trigger $trigger -FilePath "C:\Users\scripts\StorePTHDecoy.ps1"
     }
+	
+	else {
+		Write-Output "Decoy was already deployed"
+	}
     }

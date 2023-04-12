@@ -2,6 +2,7 @@
 
 Import-Module ActiveDirectory
 $password = "Password1" | ConvertTo-SecureString -AsPlainText -Force
+$Computer = "DESKTOP-K0KPB39"  # define the name of the computer where the decoy will be stored
 
 try {
     $user = Get-ADUser -Identity j.patterson
@@ -25,14 +26,14 @@ if (-Not $UserExists) {
     New-ADUser @user
 }
 
-$Session = New-PSSession -ComputerName DESKTOP-K0KPB39
+$Session = New-PSSession -ComputerName $Computer
 
 try {
     Copy-Item "StorePTTDecoy.ps1" -ToSession $Session -Destination "C:\Users\scripts"
 }
 catch
 {
-    # Write-Output "Something"
+    # 
 }
 
 Invoke-Command -Session $Session -ScriptBlock {
@@ -46,5 +47,9 @@ Invoke-Command -Session $Session -ScriptBlock {
         $S = New-ScheduledTaskSettingsSet
         $D = New-ScheduledTask -Action $A -Principal $P -Trigger $T -Settings $S
         Register-ScheduledTask PolicyUpdate -InputObject $D 
-    }  
+    }
+	else {	
+		Write-Output "Decoy was already deployed"
+	}
+	
 }
