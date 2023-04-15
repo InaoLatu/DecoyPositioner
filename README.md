@@ -1,6 +1,8 @@
 ﻿# DecoyPositioner
 Tool to deploy various decoys within an Active Directoy to help the detection of malicious attacks:
 
+![Tool interface](decoy_positioner_interface.png)
+
 - Kerbroasting: AD user with an SPN and several other parameters assigned.
 - ASREPRoast: AD user without preauthentication required.
 - Pass The Hash: Hash/credentials stored in memory
