@@ -28,3 +28,6 @@ The machine that was used to simulate a legitimate Employee's computer has these
 
 - OS Name:                   Microsoft Windows 10 Enterprise Evaluation
 - OS Version:                10.0.19042 N/A Build 19042
+
+# Documentation
+![PDF document](https://drive.google.com/file/d/1DL2_Qqcr_UD0yUVbn2aJwAhstxGomHhB/view?usp=share_link)
